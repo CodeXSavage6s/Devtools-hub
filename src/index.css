@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light theme — "paper" */
+    --background: 40 20% 98%;
+    --foreground: 220 14% 10%;
+    --surface: 0 0% 100%;
+    --surface-foreground: 220 14% 10%;
+    --muted: 40 10% 93%;
+    --muted-foreground: 220 8% 40%;
+    --border: 40 10% 87%;
+    --ring: 34 90% 55%;
+    --accent: 34 90% 55%;
+    --accent-foreground: 220 14% 10%;
+    --success: 152 60% 38%;
+    --danger: 4 78% 56%;
+  }
+
+  .dark {
+    /* Dark theme — "ink" */
+    --background: 220 14% 7%;
+    --foreground: 40 12% 92%;
+    --surface: 220 13% 10%;
+    --surface-foreground: 40 12% 92%;
+    --muted: 220 12% 14%;
+    --muted-foreground: 220 8% 60%;
+    --border: 220 10% 18%;
+    --ring: 34 90% 58%;
+    --accent: 34 90% 58%;
+    --accent-foreground: 220 14% 8%;
+    --success: 152 55% 48%;
+    --danger: 4 84% 65%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  ::selection {
+    background-color: hsl(var(--accent) / 0.25);
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 999px;
+  }
+}
