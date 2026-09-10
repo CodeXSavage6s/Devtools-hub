@@ -29,7 +29,7 @@ export function JwtDecoder() {
 
   return (
     <div className="space-y-6">
-      <Alert variant="warning">
+      <Alert variant="warning" className="text-gray-500">
         <ShieldAlert />
         <div>
           <AlertTitle>This is a decoder, not a verifier</AlertTitle>

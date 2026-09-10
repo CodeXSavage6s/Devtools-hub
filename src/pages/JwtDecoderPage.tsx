@@ -4,9 +4,12 @@ export function JwtDecoderPage() {
   return (
     <div className="space-y-6">
       <div className="space-y-1.5">
+        <div className="flex justify-between items-center">
         <h1 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
           JWT Decoder
         </h1>
+        <a href="https://www.jwt.io/" className="text-sm text-yellow-600">Learn about JWT</a>
+        </div>
         <p className="text-sm text-muted-foreground sm:text-base">
           Decode a JWT's header and payload, and inspect its claims — locally, in your browser.
         </p>
