@@ -84,6 +84,17 @@ export function computeStats(input: string): JsonStats {
   };
 }
 
+export const MAX_UPLOAD_BYTES = 5 * 1024 * 1024; // 5 MB
+
+export function validateUploadFile(file: File): string | null {
+  const looksLikeJson = file.name.endsWith(".json") || file.type === "application/json";
+  if (!looksLikeJson) return "Please choose a .json file";
+  if (file.size > MAX_UPLOAD_BYTES) {
+    return `That file is too large (${(file.size / (1024 * 1024)).toFixed(1)} MB) — the limit is ${MAX_UPLOAD_BYTES / (1024 * 1024)} MB.`;
+  }
+  return null;
+}
+
 export const EXAMPLE_JSON = JSON.stringify(
   { name: "Savage", age: 16, active: true,
     projects: ["NexusForge", "DevTools Hub", "don-gb"],

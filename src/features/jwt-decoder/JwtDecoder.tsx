@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useClipboard } from "@/hooks/useClipboard";
+import { DocsLink } from "@/components/shared/DocsLink";
 import { JwtInput } from "./components/JwtInput";
 import { JwtSection } from "./components/JwtSection";
 import { ClaimsTable } from "./components/ClaimsTable";
@@ -29,7 +30,7 @@ export function JwtDecoder() {
 
   return (
     <div className="space-y-6">
-      <Alert variant="warning" className="text-gray-500">
+      <Alert variant="warning">
         <ShieldAlert />
         <div>
           <AlertTitle>This is a decoder, not a verifier</AlertTitle>
@@ -86,10 +87,11 @@ export function JwtDecoder() {
               <Card>
                 <CardContent className="space-y-3 pt-5">
                   <p className="text-sm text-muted-foreground">
-                    The signature is a cryptographic hash, not encoded data — it can't be
-                    "decoded" like the header and payload. It can only be checked against the
-                    original secret or public key, which this tool doesn't have and never asks
-                    for.
+                    The signature is a cryptographic value used to verify the token's integrity
+                    and authenticity — it isn't encoded data, so it can't be "decoded" like the
+                    header and payload. This tool displays the signature but does not verify it:
+                    doing so requires the issuer's original secret or public key, which this tool
+                    doesn't have and never asks for.
                   </p>
                   <div className="flex items-start justify-between gap-3 rounded-md bg-muted/40 p-3">
                     <span className="break-all font-mono text-xs">
@@ -109,6 +111,13 @@ export function JwtDecoder() {
           </Tabs>
         </div>
       )}
+
+      <DocsLink
+        links={[
+          { label: "jwt.io introduction", href: "https://jwt.io/introduction" },
+          { label: "RFC 7519 spec", href: "https://www.rfc-editor.org/rfc/rfc7519" },
+        ]}
+      />
     </div>
   );
 }

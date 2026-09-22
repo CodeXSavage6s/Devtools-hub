@@ -2,9 +2,12 @@ import { FileCode, Trash2 } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
+// Header + payload are real base64url-encoded JSON; exp is set well into
+// the future (2030) so the example doesn't show as expired. The signature
+// segment is a placeholder — this tool never verifies signatures anyway.
 const EXAMPLE_JWT =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." +
-  "eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaXNzIjoiZGV2dG9vbHMtaHViIiwiaWF0IjoxNzAwMDAwMDAwLCJleHAiOjE3NjM4NDAwMDB9." +
+  "eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaXNzIjoiZGV2dG9vbHMtaHViIiwiaWF0IjoxNzAwMDAwMDAwLCJleHAiOjE4OTM0NTYwMDB9." +
   "4Adcj3UFYzPUVaVF43FmMab6RlaQD8A9V8wFzzht-KQ";
 
 interface JwtInputProps {

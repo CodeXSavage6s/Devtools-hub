@@ -1,21 +1,19 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { TerminalSquare, Menu, X, Monitor, Sun, Moon } from "lucide-react";
+import { NavLink, Link } from "react-router-dom";
+import { TerminalSquare, Menu, X, Monitor, Sun, Moon, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/useTheme";
+import { TOOLS } from "@/lib/tools";
+import { TOOL_CATEGORIES } from "@/types/tool";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-
-const NAV_LINKS = [
-  { to: "/", label: "Home", end: true },
-  { to: "/json-inspector", label: "JSON Inspector", end: false },
-  { to: "/jwt-decoder", label: "JWT Decoder", end: false },
-];
 
 function ThemeToggle() {
   const { theme, resolvedTheme, setTheme } = useTheme();
@@ -43,6 +41,34 @@ function ThemeToggle() {
   );
 }
 
+function ToolsMenu() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="ghost"
+          className="gap-1 px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground"
+        >
+          Tools <ChevronDown className="h-3.5 w-3.5" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start" className="min-w-[15rem]">
+        {TOOL_CATEGORIES.map((category, index) => (
+          <div key={category}>
+            {index > 0 && <DropdownMenuSeparator />}
+            <DropdownMenuLabel>{category}</DropdownMenuLabel>
+            {TOOLS.filter((tool) => tool.category === category).map((tool) => (
+              <DropdownMenuItem key={tool.id} asChild>
+                <Link to={tool.href}>{tool.name}</Link>
+              </DropdownMenuItem>
+            ))}
+          </div>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -59,21 +85,19 @@ export function Header() {
         </NavLink>
 
         <nav className="hidden items-center gap-1 md:flex">
-          {NAV_LINKS.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              end={link.end}
-              className={({ isActive }) =>
-                cn(
-                  "rounded-sm px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground",
-                  isActive && "bg-muted text-foreground"
-                )
-              }
-            >
-              {link.label}
-            </NavLink>
-          ))}
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) =>
+              cn(
+                "rounded-sm px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground",
+                isActive && "bg-muted text-foreground"
+              )
+            }
+          >
+            Home
+          </NavLink>
+          <ToolsMenu />
         </nav>
 
         <div className="flex items-center gap-2">
@@ -95,23 +119,42 @@ export function Header() {
 
       {mobileOpen && (
         <nav className="flex flex-col gap-1 border-t border-border px-4 py-3 md:hidden">
-          {NAV_LINKS.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              end={link.end}
-              onClick={() => setMobileOpen(false)}
-              className={({ isActive }) =>
-                cn(
-                  "rounded-sm px-3 py-2 text-sm font-medium text-muted-foreground transition-colors",
-                  isActive && "bg-muted text-foreground"
-                )
-              }
-            >
-              {link.label}
-            </NavLink>
+          <NavLink
+            to="/"
+            end
+            onClick={() => setMobileOpen(false)}
+            className={({ isActive }) =>
+              cn(
+                "rounded-sm px-3 py-2 text-sm font-medium text-muted-foreground transition-colors",
+                isActive && "bg-muted text-foreground"
+              )
+            }
+          >
+            Home
+          </NavLink>
+
+          {TOOL_CATEGORIES.map((category) => (
+            <div key={category} className="mt-2">
+              <p className="px-3 py-1 text-xs font-medium text-muted-foreground">{category}</p>
+              {TOOLS.filter((tool) => tool.category === category).map((tool) => (
+                <NavLink
+                  key={tool.id}
+                  to={tool.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={({ isActive }) =>
+                    cn(
+                      "block rounded-sm px-3 py-2 text-sm font-medium text-muted-foreground transition-colors",
+                      isActive && "bg-muted text-foreground"
+                    )
+                  }
+                >
+                  {tool.name}
+                </NavLink>
+              ))}
+            </div>
           ))}
-          <div className="mt-2 flex items-center justify-between px-3">
+
+          <div className="mt-3 flex items-center justify-between border-t border-border px-3 pt-3">
             <span className="text-xs text-muted-foreground">Theme</span>
             <ThemeToggle />
           </div>

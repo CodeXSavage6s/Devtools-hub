@@ -2,6 +2,7 @@ import { useMemo, useRef, useState, type DragEvent, type UIEvent } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/useToast";
+import { validateUploadFile } from "../utils/json";
 
 interface JsonEditorProps {
   value: string;
@@ -30,8 +31,9 @@ export function JsonEditor({ value, onChange, onFileLoaded }: JsonEditorProps) {
     setIsDragOver(false);
     const file = event.dataTransfer.files?.[0];
     if (!file) return;
-    if (!file.name.endsWith(".json") && file.type !== "application/json") {
-      showToast("Please drop a .json file", "error");
+    const validationError = validateUploadFile(file);
+    if (validationError) {
+      showToast(validationError, "error");
       return;
     }
     const reader = new FileReader();

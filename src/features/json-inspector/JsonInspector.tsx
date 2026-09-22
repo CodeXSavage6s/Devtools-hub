@@ -4,6 +4,7 @@ import { JsonResult } from "./components/JsonResult";
 import { JsonToolbar } from "./components/JsonToolbar";
 import { EXAMPLE_JSON, computeStats, formatJson, minifyJson, parseJson } from "./utils/json";
 import { useToast } from "@/hooks/useToast";
+import { DocsLink } from "@/components/shared/DocsLink";
 import type { JsonStatus } from "./types";
 
 type OutputMode = "format" | "minify";
@@ -78,6 +79,16 @@ export function JsonInspector() {
           <JsonResult status={status} output={output} error={error} stats={stats} />
         </div>
       </div>
+
+      <DocsLink
+        links={[
+          { label: "JSON.org spec", href: "https://www.json.org/json-en.html" },
+          {
+            label: "MDN JSON reference",
+            href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+          },
+        ]}
+      />
     </div>
   );
 }

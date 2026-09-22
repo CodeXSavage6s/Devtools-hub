@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { AlignLeft, Minimize2, CheckCircle2, Trash2, FileCode, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/useToast";
+import { validateUploadFile } from "../utils/json";
 
 interface JsonToolbarProps {
   onFormat: () => void;
@@ -27,8 +28,9 @@ export function JsonToolbar({
 
   const handleFile = (file: File | undefined) => {
     if (!file) return;
-    if (!file.name.endsWith(".json") && file.type !== "application/json") {
-      showToast("Please choose a .json file", "error");
+    const validationError = validateUploadFile(file);
+    if (validationError) {
+      showToast(validationError, "error");
       return;
     }
     const reader = new FileReader();
