@@ -112,12 +112,8 @@ export function JwtDecoder() {
         </div>
       )}
 
-      <DocsLink
-        links={[
-          { label: "jwt.io introduction", href: "https://jwt.io/introduction" },
-          { label: "RFC 7519 spec", href: "https://www.rfc-editor.org/rfc/rfc7519" },
-        ]}
-      />
+      <DocsLink label="jwt.io introduction" href="https://jwt.io/introduction" />
+      <DocsLink label="RFC 7519 spec" href="https://www.rfc-editor.org/rfc/rfc7519" />
     </div>
   );
 }

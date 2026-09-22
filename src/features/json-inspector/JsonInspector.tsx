@@ -80,15 +80,9 @@ export function JsonInspector() {
         </div>
       </div>
 
-      <DocsLink
-        links={[
-          { label: "JSON.org spec", href: "https://www.json.org/json-en.html" },
-          {
-            label: "MDN JSON reference",
-            href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
-          },
-        ]}
-      />
+      <DocsLink label="JSON.org spec" href="https://www.json.org/json-en.html" />
+          
+      <DocsLink label="MDN JSON reference" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON" />
     </div>
   );
 }

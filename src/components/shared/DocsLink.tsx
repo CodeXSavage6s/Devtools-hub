@@ -5,7 +5,7 @@ interface DocLink {
   href: string;
 }
 
-export function DocsLink({ label, href }: { DocLink }) {
+export function DocsLink({ label, href }: DocLink ) {
   return (
     <p className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-xs text-muted-foreground">
       <span className="inline-flex items-center gap-1">

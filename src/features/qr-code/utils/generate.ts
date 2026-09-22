@@ -1,7 +1,7 @@
 import QRCode from "qrcode";
 import type { QrGenerateOptions } from "../types";
 
-export type GenerateResult = { dataUrl: string; error: null } | { dataUrl: null; error: string };
+export type GenerateResult = { dataUrl: string | null; error: string | null } ;
 
 /**
  * Renders a QR code to a PNG data URL. Colors are intentionally fixed to
